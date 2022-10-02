@@ -19,15 +19,20 @@ import Paper from '@mui/material/Paper';
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-export default function DetailsTable({rows}) {
+export default function AdminDetailsTable({rows}) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 ,textAlign:'center'}} aria-label="simple table">
+      <Table sx={{ minWidth: 650,textAlign:'center' }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align='center' >Login Time</TableCell>
-            <TableCell align="center">Session Time</TableCell>
-            <TableCell align="center">Message</TableCell>
+            <TableCell align='center'>USERNAME</TableCell>
+            <TableCell align="center">EMAIL</TableCell>
+            <TableCell align="center">MOBILE NO.</TableCell>
+            <TableCell align="center">LOGIN TIME</TableCell>
+            <TableCell align="center">MESSAGE</TableCell>
+
+            
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,9 +41,13 @@ export default function DetailsTable({rows}) {
               key={row.session_id}
             //   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-                           <TableCell align="center">{row.login_time}</TableCell>
-
-              <TableCell align="center">{row.session_time==0?'less than one minute':row.session_time}</TableCell>
+              {/* <TableCell component="th" scope="row">
+                {row.username}
+              </TableCell> */}
+              <TableCell align="center">{row.username}</TableCell>
+              <TableCell align="center">{row.email}</TableCell>
+              <TableCell align="center">{row.mobile_number}</TableCell>
+              <TableCell align="center">{row.login_time}</TableCell>
               <TableCell align="center">{row.message}</TableCell>
             </TableRow>
           ))}
