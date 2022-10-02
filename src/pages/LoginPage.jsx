@@ -31,12 +31,63 @@ export default function LoginPage() {
   const emailRef=useRef()
   const usernameRef=useRef()
   const mobileNumber=useRef()
+  function ValidateEmail(inputText)
+ {
+ var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+ if(inputText.match(mailformat))
+ {
+  console.log('matched')
+  return true
+ 
+ }
+ else
+ {
+  console.log('hurrrah')
+  
+  return false;
+ }
+ }
+ function phonenumber(inputtxt){
+  var phoneno = /^\d{10}$/;
+  if(inputtxt.match(phoneno)){
+      return true;
+        }
+      else
+        {
+        return false;
+        }
+}
   const handleSubmit = (e) => {
     e.preventDefault()
     const email=!loginState? emailRef.current.value : ''
     const password= passwordRef.current.value
     const username=passwordRef.current.value
     const mobile= !loginState? mobileNumber.current.value :''
+    if(!loginState){
+      const emailState=ValidateEmail(email)
+      if(!emailState){
+      dispatch(snackActions.snackBarDetailsAdder({severity:'info',message:'This is not a valid email',position:{vertical:'top',horizontal:'center'}}))
+  emailRef.current.focus();
+      return
+      }
+      const mobileState=phonenumber(mobile)
+      if(!mobileState){
+      dispatch(snackActions.snackBarDetailsAdder({severity:'info',message:'This is not a valid Number',position:{vertical:'top',horizontal:'center'}}))
+        mobileNumber.current.focus();
+        return
+      }
+      if(password.length<=0 || username.length<=0){
+      dispatch(snackActions.snackBarDetailsAdder({severity:'info',message:'fill the inputs',position:{vertical:'top',horizontal:'center'}}))
+return
+      }
+
+    }else{
+      if(password.length<=0 || username.length<=0){
+        dispatch(snackActions.snackBarDetailsAdder({severity:'info',message:'fill the inputs',position:{vertical:'top',horizontal:'center'}}))
+  return
+        }
+
+    }
     let url=loginState?'http://localhost:4000/login':'http://localhost:4000/registeruser'
     axios.post(url,{
       email,
@@ -46,10 +97,11 @@ export default function LoginPage() {
     }).then((res)=>{
       console.log(res)
       dispatch(authActions.loginHandler(res.data))
+      dispatch(snackActions.snackBarDetailsAdder({severity:'success',message:'logged in',position:{vertical:'top',horizontal:'center'}}))
       history.replace('/home')
     }).catch(e=>{
       console.log(e)
-      dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:e.response.data.message,position:{vertical:'top',horizontal:'right'}}))
+      dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:e.response.data.message,position:{vertical:'top',horizontal:'center'}}))
     })
 };
 const loginHandler=()=>{

@@ -7,6 +7,7 @@ const authSlice=createSlice({
         isLoggedIn:true,
         role:0,
         status:'',
+        sessionId:'',
         change:true
     },
     reducers:{
@@ -15,8 +16,9 @@ const authSlice=createSlice({
             console.log(data)
           
                     state.isLoggedIn=true;
-                    state.role=data.role
-                    state.status=data.status
+                    state.role=data.role;
+                    state.status=data.status;
+                    state.sessionId=data.sessionId;
                     localStorage.setItem('token',data.token)
         },
         logoutHandler(state){
@@ -24,6 +26,7 @@ const authSlice=createSlice({
             state.isLoggedIn=false;
             localStorage.removeItem('token')
             state.role=0
+            state.sessionId=''
         },
         changeHandler(state){
             state.change=!state.change

@@ -10,6 +10,7 @@ import Welcome from '../Components/Welcome'
 
 const adminColumn=[]
 function Home() {
+    const [isLoading,setIsLoading]=useState(false)
     const role=useSelector(state=>state.authHandler.role)
     const change=useSelector(state=>state.authHandler.change)
     
@@ -17,6 +18,7 @@ function Home() {
     console.log(details)
     const [username,setUsername]=useState('')
     useEffect(()=>{
+        setIsLoading(true)
     axios.get('http://localhost:4000/getDetails',{
         headers:{
             'x-access-token':localStorage.getItem('token')?localStorage.getItem('token'):""
@@ -24,6 +26,10 @@ function Home() {
     }).then(res=>{
         setDetails([...res.data.details])
         setUsername(res.data.username)
+        setIsLoading(false)
+    }).catch(e=>{
+        setIsLoading(false)
+
     })
 
     },[change])

@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useSelector } from 'react-redux';
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -20,6 +21,7 @@ import Paper from '@mui/material/Paper';
 // ];
 
 export default function DetailsTable({rows}) {
+    const sessionId=useSelector(state=>state.authHandler.sessionId)
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 ,textAlign:'center'}} aria-label="simple table">
@@ -36,9 +38,9 @@ export default function DetailsTable({rows}) {
               key={row.session_id}
             //   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-                           <TableCell align="center">{row.login_time}</TableCell>
+                           <TableCell align="center">{ row.login_time}</TableCell>
 
-              <TableCell align="center">{row.session_time==0?'less than one minute':row.session_time}</TableCell>
+              <TableCell align="center">{row.session_id===sessionId? 'Current Session Going On':row.session_time==0?'less than one minute':row.session_time}</TableCell>
               <TableCell align="center">{row.message}</TableCell>
             </TableRow>
           ))}

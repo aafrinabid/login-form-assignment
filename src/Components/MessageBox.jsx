@@ -12,7 +12,7 @@ function MessageBox() {
     const submitHandler=()=>{
         const text=inputRef.current.value
         if(text.length<=0){
-return dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:'type something message is empty',position:{vertical:'top',horizontal:'right'}}))
+return dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:'type something message is empty',position:{vertical:'top',horizontal:'center'}}))
         }
         axios.post('http://localhost:4000/addMessage',{text},{
             headers:{
@@ -21,7 +21,8 @@ return dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:'typ
         }).then((res=>{
             if(res.data.update){
                 dispatch(authActions.changeHandler())
-                return dispatch(snackActions.snackBarDetailsAdder({severity:'info',message:'message added succesfully',position:{vertical:'top',horizontal:'right'}}))
+                inputRef.current.value=''
+                return dispatch(snackActions.snackBarDetailsAdder({severity:'success',message:'message added succesfully',position:{vertical:'top',horizontal:'center'}}))
             }
             
         })).catch((e)=>{
