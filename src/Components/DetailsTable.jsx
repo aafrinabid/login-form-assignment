@@ -26,7 +26,7 @@ export default function DetailsTable({rows}) {
         <TableHead>
           <TableRow>
             <TableCell align='center' >Login Time</TableCell>
-            <TableCell align="center">Session Time</TableCell>
+            <TableCell align="center">Session Time <br /> (in minutes)</TableCell>
             <TableCell align="center">Message</TableCell>
           </TableRow>
         </TableHead>

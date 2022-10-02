@@ -11,6 +11,8 @@ import Welcome from '../Components/Welcome'
 const adminColumn=[]
 function Home() {
     const role=useSelector(state=>state.authHandler.role)
+    const change=useSelector(state=>state.authHandler.change)
+    
     const [details,setDetails]=useState([])
     console.log(details)
     const [username,setUsername]=useState('')
@@ -24,16 +26,17 @@ function Home() {
         setUsername(res.data.username)
     })
 
-    },[])
+    },[change])
   return (
     <div>
         <ButtonAppBar />
         <Welcome username={role==0?username:'admin'}/>
  {role===0 &&      <MessageBox />}
     <h1>DETAILS</h1>
+    <div style={{padding:'10px'}}>
        {role ===0 && <DetailsTable rows={details}/>}
        {role ===1 && <AdminDetailsTable rows={details}/>}
-
+       </div>
     </div>
   )
 }

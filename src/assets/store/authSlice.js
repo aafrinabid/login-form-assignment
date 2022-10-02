@@ -6,7 +6,8 @@ const authSlice=createSlice({
     initialState:{
         isLoggedIn:true,
         role:0,
-        status:''
+        status:'',
+        change:true
     },
     reducers:{
         loginHandler(state,action){
@@ -23,6 +24,9 @@ const authSlice=createSlice({
             state.isLoggedIn=false;
             localStorage.removeItem('token')
             state.role=0
+        },
+        changeHandler(state){
+            state.change=!state.change
         }
     }
     

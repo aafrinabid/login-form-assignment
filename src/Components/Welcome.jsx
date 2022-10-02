@@ -2,7 +2,10 @@ import React from 'react'
 
 function Welcome({username}) {
   return (
-    <div>Welcome {username}</div>
+    <div>
+        <h1>Welcome {username}
+        </h1>
+        </div>
   )
 }
 
