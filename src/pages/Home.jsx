@@ -19,7 +19,7 @@ function Home() {
     const [username,setUsername]=useState('')
     useEffect(()=>{
         setIsLoading(true)
-    axios.get('http://localhost:4000/getDetails',{
+    axios.get('https://login-form-assignment.herokuapp.com/getDetails',{
         headers:{
             'x-access-token':localStorage.getItem('token')?localStorage.getItem('token'):""
         }

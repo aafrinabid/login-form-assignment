@@ -14,7 +14,7 @@ function MessageBox() {
         if(text.length<=0){
 return dispatch(snackActions.snackBarDetailsAdder({severity:'error',message:'type something message is empty',position:{vertical:'top',horizontal:'center'}}))
         }
-        axios.post('http://localhost:4000/addMessage',{text},{
+        axios.post('https://login-form-assignment.herokuapp.com/addMessage',{text},{
             headers:{
                 'x-access-token':localStorage.getItem('token')?localStorage.getItem('token'):""
             }

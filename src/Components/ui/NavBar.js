@@ -16,7 +16,7 @@ export default function ButtonAppBar() {
     const history=useHistory()
     const logoutHandler=()=>{
         const date=Date.now()
-        axios.post('http://localhost:4000/logoutHandler',{date},{
+        axios.post('https://login-form-assignment.herokuapp.com/logoutHandler',{date},{
             headers:{
                 'x-access-token':localStorage.getItem('token')?localStorage.getItem('token'):""
             }

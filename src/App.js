@@ -15,7 +15,7 @@ function App() {
   const history=useHistory()
   const loginState=useSelector(state=>state.authHandler.isLoggedIn)
   useEffect(()=>{
-    axios.get('http://localhost:4000/isAuth',{
+    axios.get('https://login-form-assignment.herokuapp.com/isAuth',{
       headers:{
         'x-access-token':localStorage.getItem('token')?localStorage.getItem('token'):""
       }
